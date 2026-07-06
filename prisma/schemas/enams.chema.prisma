@@ -1,0 +1,10 @@
+enum role {
+    TENANT
+    LANDLORD
+    ADMIN
+}
+
+enum status {
+    ACTIVE
+    BANNED
+}
