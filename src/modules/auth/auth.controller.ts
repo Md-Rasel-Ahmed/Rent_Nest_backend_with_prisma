@@ -35,7 +35,19 @@ const loginUser:RequestHandler=catchAsync(async(req,res)=>{
     data:result
    })
 })
+const getProfile:RequestHandler=catchAsync(async(req,res)=>{
+    const id=req.user?.id
+    
+    const result=await authService.getProfileIntoDb(id)
+     sendResponse(res,{
+    statusCode:httpStatus.OK,
+    success:true,
+    message:"User retrived successfull",
+    data:result
+   })
+})
 export const authController={
  registerUser,
- loginUser
+ loginUser,
+ getProfile
 }

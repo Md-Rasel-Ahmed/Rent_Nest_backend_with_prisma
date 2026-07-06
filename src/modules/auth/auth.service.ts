@@ -48,13 +48,22 @@ const loginUserIntoDb=async(payload:IauthUser)=>{
  }
  const jwtPayload={
     email:user.email,
-    password:user.password,
-    role:user.role
+    role:user.role,
+    id:user.id
  }
  const token=jwtUtils.createToken(jwtPayload)
  return token
 }
+const getProfileIntoDb=async(id:string)=>{
+  const user=await prisma.users.findUniqueOrThrow({
+    where:{
+        id:id
+    }
+  })
+  return user
+}
 export const authService={
     registerUserIntoDb,
-    loginUserIntoDb
+    loginUserIntoDb,
+    getProfileIntoDb
 }
