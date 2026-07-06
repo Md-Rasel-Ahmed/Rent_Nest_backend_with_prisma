@@ -1,0 +1,29 @@
+enum role {
+    TENANT
+    LANDLORD
+    ADMIN
+}
+
+enum status {
+    ACTIVE
+    BANNED
+}
+
+enum rentelStatus {
+    PENDING
+    APPROVED
+    REJECTED
+    ACTIVE
+    COMPLETED
+}
+
+enum provider {
+    STRIPE
+    SSLCOMMERZ
+}
+
+enum paymentStatus {
+    PENDING
+    SUCCESS
+    FAILED
+}

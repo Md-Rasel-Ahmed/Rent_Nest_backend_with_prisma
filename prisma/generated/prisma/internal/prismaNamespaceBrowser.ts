@@ -51,7 +51,12 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  User: 'User'
+  categories: 'categories',
+  payments: 'payments',
+  properties: 'properties',
+  rentalRequests: 'rentalRequests',
+  reviews: 'reviews',
+  users: 'users'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -70,13 +75,85 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof typeof TransactionIsolationLevel]
 
 
-export const UserScalarFieldEnum = {
+export const CategoriesScalarFieldEnum = {
   id: 'id',
-  email: 'email',
-  name: 'name'
+  name: 'name',
+  createdAt: 'createdAt'
 } as const
 
-export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+export type CategoriesScalarFieldEnum = (typeof CategoriesScalarFieldEnum)[keyof typeof CategoriesScalarFieldEnum]
+
+
+export const PaymentsScalarFieldEnum = {
+  id: 'id',
+  rentalRequestId: 'rentalRequestId',
+  userId: 'userId',
+  amount: 'amount',
+  provider: 'provider',
+  transactionId: 'transactionId',
+  status: 'status',
+  paidAt: 'paidAt'
+} as const
+
+export type PaymentsScalarFieldEnum = (typeof PaymentsScalarFieldEnum)[keyof typeof PaymentsScalarFieldEnum]
+
+
+export const PropertiesScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  address: 'address',
+  city: 'city',
+  rent: 'rent',
+  bedrooms: 'bedrooms',
+  bathrooms: 'bathrooms',
+  area: 'area',
+  isAvailable: 'isAvailable',
+  landlordId: 'landlordId',
+  categoryId: 'categoryId',
+  createdAt: 'createdAt'
+} as const
+
+export type PropertiesScalarFieldEnum = (typeof PropertiesScalarFieldEnum)[keyof typeof PropertiesScalarFieldEnum]
+
+
+export const RentalRequestsScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  propertyId: 'propertyId',
+  moveInDate: 'moveInDate',
+  status: 'status',
+  createdAt: 'createdAt'
+} as const
+
+export type RentalRequestsScalarFieldEnum = (typeof RentalRequestsScalarFieldEnum)[keyof typeof RentalRequestsScalarFieldEnum]
+
+
+export const ReviewsScalarFieldEnum = {
+  id: 'id',
+  tenantId: 'tenantId',
+  propertyId: 'propertyId',
+  rating: 'rating',
+  comment: 'comment',
+  createdAt: 'createdAt'
+} as const
+
+export type ReviewsScalarFieldEnum = (typeof ReviewsScalarFieldEnum)[keyof typeof ReviewsScalarFieldEnum]
+
+
+export const UsersScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  password: 'password',
+  phone: 'phone',
+  role: 'role',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type UsersScalarFieldEnum = (typeof UsersScalarFieldEnum)[keyof typeof UsersScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -93,12 +170,4 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
-
-
-export const NullsOrder = {
-  first: 'first',
-  last: 'last'
-} as const
-
-export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
