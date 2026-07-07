@@ -9,6 +9,7 @@ export const auth=(...role:string[])=>{
  if(!user){
     throw new Error("You are not authorized! Please login first.")
  }
+ 
   if(!role.includes(user.role)){
     throw new Error("'Forbidden! You do not have permission to access this resource.")
   }

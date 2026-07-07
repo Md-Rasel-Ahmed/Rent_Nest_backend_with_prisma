@@ -53,8 +53,38 @@ const getPropertiesIntoDb=async()=>{
     })
     return properties
 }
+const deletePropertyIntoDb=async(id:string)=>{
+    const properties=await prisma.properties.delete({
+        where:{
+            id:id
+        }
+    })
+    return properties
+}
+const updateRentalStatusIntoDb=async(id:string,payload:any)=>{
+    const properties=await prisma.rentalRequests.update({
+        where:{
+            id:id
+        },
+        data:{
+            status:payload.status
+        }
+    })
+    return properties
+}
+const getRentalRequestsIntoDb=async(userId:string)=>{
+   const getRentalProperty=await prisma.rentalRequests.findMany({
+    where:{
+        tenantId:userId
+    }
+   })
+   return getRentalProperty
+}
 export const propertiService={
     createPropertyIntoDb,
     udpatePropertyIntoDb,
-    getPropertiesIntoDb
+    getPropertiesIntoDb,
+    deletePropertyIntoDb,
+    getRentalRequestsIntoDb,
+    updateRentalStatusIntoDb
 }

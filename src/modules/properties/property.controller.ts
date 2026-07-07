@@ -36,9 +36,41 @@ const getProperties:RequestHandler=catchAsync(async(req,res)=>{
     message:"All properties retrived successfull"
   })
 })
+const deleteProperty:RequestHandler=catchAsync(async(req,res)=>{
+    const id=req.params?.id
+     const result=await propertiService.deletePropertyIntoDb(id as string)
+  sendResponse(res,{
+    success:true,
+    statusCode:httpStatus.OK,
+    message:" Property delete successfull"
+  })
+})
+const updateRentalStatus:RequestHandler=catchAsync(async(req,res)=>{
+    const id=req.params?.id
+    const payload=req.body
+     const result=await propertiService.updateRentalStatusIntoDb(id as string,payload)
+  sendResponse(res,{
+    success:true,
+    statusCode:httpStatus.OK,
+    message:"Rental status updated successfull"
+  })
+})
+const getRentalRequests:RequestHandler=catchAsync(async(req,res)=>{
+    const userId=req.user?.id
+     const result=await propertiService.getRentalRequestsIntoDb(userId)
+  sendResponse(res,{
+    success:true,
+    statusCode:httpStatus.OK,
+    message:" Rental requested property retrive successfull",
+    data:result
+  })
+})
 
 export const propertiController={
     createProperty,
+    deleteProperty,
     updateProperty,
-    getProperties
+    getProperties,
+    getRentalRequests,
+    updateRentalStatus
 }
