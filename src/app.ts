@@ -3,6 +3,8 @@ import cors from 'cors'
 import cookieParser from "cookie-parser"
 import config from "./config"
 import { authRoute } from "./modules/auth/auth.router"
+import { propertiRouter } from "./modules/properties/property.router"
+import { catergoriRouter } from "./modules/category/category.router"
 const app:Application=express()
 
 app.use(express.json())
@@ -15,7 +17,8 @@ app.use(express.urlencoded({extended:true}))
 
 
 app.use('/api/auth',authRoute)
-
+app.use("/api/landlord",propertiRouter)
+app.use("/api/categories",catergoriRouter)
 app.get('/',(req:Request,res:Response)=>{
     res.send("Server is connected!")
 })
