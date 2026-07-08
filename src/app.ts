@@ -6,6 +6,8 @@ import { authRoute } from "./modules/auth/auth.router"
 import { propertiRouter } from "./modules/properties/property.router"
 import { catergoriRouter } from "./modules/category/category.router"
 import { rentalRouter } from "./modules/rental/rental.router"
+import { reviewRouter } from "./modules/review/review.router"
+import { adminRouter } from "./modules/admin/admin.router"
 const app:Application=express()
 
 app.use(express.json())
@@ -18,9 +20,11 @@ app.use(express.urlencoded({extended:true}))
 
 
 app.use('/api/auth',authRoute)
+app.use("/api/admin",adminRouter)
 app.use("/api/landlord",propertiRouter)
 app.use("/api/categories",catergoriRouter)
 app.use("/api/rentals",rentalRouter)
+app.use("/api/reviews",reviewRouter)
 app.get('/',(req:Request,res:Response)=>{
     res.send("Server is connected!")
 })
