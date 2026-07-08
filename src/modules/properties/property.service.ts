@@ -45,10 +45,18 @@ const udpatePropertyIntoDb=async(payload:Iupdate,id:string)=>{
 
   return updatedProperty;
 }
-const getPropertiesIntoDb=async()=>{
+const getPropertiesIntoDb=async(queries:any)=>{
+    console.log(queries);
     const properties=await prisma.properties.findMany({
         where:{
-            isAvailable:true
+            isAvailable:true,
+            address:{
+                contains:queries.address,
+                mode:"insensitive"
+            },
+            rent:{
+                lte:Number(queries.rent)
+            }
         },
         include:{
             reviews:true
@@ -83,11 +91,20 @@ const getRentalRequestsIntoDb=async(userId:string)=>{
    })
    return getRentalProperty
 }
+const getSingleProperty=async(id:string)=>{
+   const getSingleProperty=await prisma.properties.findUniqueOrThrow({
+    where:{
+        id:id
+    }
+   })
+   return getSingleProperty
+}
 export const propertiService={
     createPropertyIntoDb,
     udpatePropertyIntoDb,
     getPropertiesIntoDb,
     deletePropertyIntoDb,
+    getSingleProperty,
     getRentalRequestsIntoDb,
     updateRentalStatusIntoDb
 }

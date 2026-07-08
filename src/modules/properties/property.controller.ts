@@ -28,7 +28,7 @@ const updateProperty:RequestHandler=catchAsync(async(req,res)=>{
   })
 })
 const getProperties:RequestHandler=catchAsync(async(req,res)=>{
-     const result=await propertiService.getPropertiesIntoDb()
+     const result=await propertiService.getPropertiesIntoDb(req.query)
   sendResponse(res,{
     success:true,
     statusCode:httpStatus.OK,
@@ -65,11 +65,22 @@ const getRentalRequests:RequestHandler=catchAsync(async(req,res)=>{
     data:result
   })
 })
+const getSingleProperty:RequestHandler=catchAsync(async(req,res)=>{
+    const id=req.params?.id
+     const result=await propertiService.getSingleProperty(id as string)
+  sendResponse(res,{
+    success:true,
+    statusCode:httpStatus.OK,
+    message:" Property retrive successfull",
+    data:result
+  })
+})
 
 export const propertiController={
     createProperty,
     deleteProperty,
     updateProperty,
+    getSingleProperty,
     getProperties,
     getRentalRequests,
     updateRentalStatus
