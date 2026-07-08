@@ -6,4 +6,8 @@ import { role } from "../../../prisma/generated/prisma/enums";
 
 const route=Router()
 route.get("/users",verifyToken,auth(role.ADMIN),adminController.getAllUser)
+route.get("/properties",verifyToken,auth(role.ADMIN),adminController.getAllProperty)
+route.get("/rentals",verifyToken,auth(role.ADMIN),adminController.getAllRental)
+route.patch("/users/:id",verifyToken,auth(role.ADMIN),adminController.updateUserStatus)
+route.patch("/category/:id",verifyToken,auth(role.ADMIN),adminController.updateCategory)
 export const adminRouter=route

@@ -47,8 +47,10 @@ const udpatePropertyIntoDb=async(payload:Iupdate,id:string)=>{
 }
 const getPropertiesIntoDb=async()=>{
     const properties=await prisma.properties.findMany({
+        where:{
+            isAvailable:true
+        },
         include:{
-            rentalRequests:true,
             reviews:true
         }
     })
