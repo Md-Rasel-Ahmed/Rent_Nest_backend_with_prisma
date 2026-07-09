@@ -11,6 +11,9 @@ interface IauthUser{
 }
 const registerUserIntoDb=async(payload:IauthUser)=>{
    const {email,password,role}=payload
+   if(!password || typeof password ==="number" || password.length<0 ){
+    throw new Error("Password must be provided or string password")
+   }
 //    role valided from client side to selected role 
    if(role==="ADMIN"){
    throw new Error("You are not authorized to register as an admin!")
@@ -37,6 +40,10 @@ const registerUserIntoDb=async(payload:IauthUser)=>{
 
 const loginUserIntoDb=async(payload:IauthUser)=>{
     const {password,email}=payload
+    
+     if(!password || typeof password ==="number" || password.length<0 ){
+    throw new Error("Password must be provided or string password")
+   }
  const user=await prisma.users.findUniqueOrThrow({
     where:{
         email:email

@@ -6,12 +6,8 @@ import  httpStatus  from "http-status"
     try {
        await fn(req,res,next)
     } catch (error) {
-       res.status(httpStatus.INTERNAL_SERVER_ERROR).send({
-        success:false,
-        statusCode:httpStatus.INTERNAL_SERVER_ERROR,
-        message:"Faild to register user",
-        error:(error as Error).message
-       })
+       
+       next(error)
     }
  }
 }
