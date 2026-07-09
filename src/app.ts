@@ -11,6 +11,8 @@ import { adminRouter } from "./modules/admin/admin.router"
 import { paymentRouter } from "./modules/payment/payment.router"
 const app:Application=express()
 
+app.use("/api/payments/confirm",express.raw({ type: 'application/json' }))
+
 app.use(express.json())
 app.use(cors({
     origin:config.app_url,
