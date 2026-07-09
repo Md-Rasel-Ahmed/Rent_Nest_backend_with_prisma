@@ -99,6 +99,7 @@ const handleConfrim=async(sig:string,payload:Buffer)=>{
 }
 
 const getUserPaymentHistoryIntoDb=async(userId:string)=>{
+  console.log(userId);
 const paymentHistories=await prisma.payments.findMany({
   where:{
     userId:userId

@@ -21,8 +21,12 @@ console.log(payload,userId);
  })
  return rental
 }
-const getRentalIntoDb=async()=>{
-   const getRentals=await prisma.rentalRequests.findMany()
+const getRentalIntoDb=async(userId:string)=>{
+   const getRentals=await prisma.rentalRequests.findMany({
+    where:{
+        tenantId:userId
+    }
+   })
    return getRentals
 }
 

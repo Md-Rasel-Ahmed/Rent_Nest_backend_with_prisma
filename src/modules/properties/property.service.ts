@@ -47,21 +47,26 @@ const udpatePropertyIntoDb=async(payload:Iupdate,id:string)=>{
 }
 const getPropertiesIntoDb=async(queries:any)=>{
     console.log(queries);
+    const rent=queries.rent?Number(queries.rent):undefined
     const properties=await prisma.properties.findMany({
         where:{
             isAvailable:true,
             address:{
-                contains:queries.address,
+                contains:queries.address||undefined,
                 mode:"insensitive"
             },
-            rent:{
-                lte:Number(queries.rent)
-            }
+            ...(rent && {
+      rent: {
+        lte: rent
+      }
+    })
         },
         include:{
             reviews:true
         }
     })
+
+    console.log(properties);
     return properties
 }
 const deletePropertyIntoDb=async(id:string)=>{

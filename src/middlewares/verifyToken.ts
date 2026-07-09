@@ -5,7 +5,7 @@ import config from "../config";
 declare global {
   namespace Express {
     interface Request {
-      user?: JwtPayload | { id: string; role: string }; 
+      user?: JwtPayload | { id: string; role: string,status:string }; 
     }
   }
 }

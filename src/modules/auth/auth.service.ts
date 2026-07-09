@@ -56,7 +56,8 @@ const loginUserIntoDb=async(payload:IauthUser)=>{
  const jwtPayload={
     email:user.email,
     role:user.role,
-    id:user.id
+    id:user.id,
+    status:user.status
  }
  const token=jwtUtils.createToken(jwtPayload)
  return token

@@ -1,12 +1,12 @@
 {
-  "name": "blog-with-prisma",
+  "name": "Assingment_4 ",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc",
-    "stripe":"stripe listen --forward-to localhost:5000/api/payments/confirm",
+    "build": "tsup",
+    "stripe": "stripe listen --forward-to localhost:5000/api/payments/confirm",
     "start": "node dist/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -36,6 +36,7 @@
     "http-status": "^2.1.0",
     "jsonwebtoken": "^9.0.3",
     "pg": "^8.22.0",
-    "stripe": "^22.3.0"
+    "stripe": "^22.3.0",
+    "tsup": "^8.5.1"
   }
 }

@@ -17,8 +17,8 @@ const createRental:RequestHandler=catchAsync(async(req,res)=>{
   })
 })
 const getRental:RequestHandler=catchAsync(async(req,res)=>{
-
-  const result=await rentalService.getRentalIntoDb()
+  const id=req.user?.id
+  const result=await rentalService.getRentalIntoDb(id)
   sendResponse(res,{
     success:true,
     statusCode:httpStatus.OK,
