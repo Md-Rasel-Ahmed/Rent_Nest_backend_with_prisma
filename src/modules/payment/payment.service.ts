@@ -6,9 +6,22 @@ const stripe = new Stripe(config.stripe_secret_key as string, {
   apiVersion: '2026-06-24.dahlia',
 });
 
-const createCheckoutSession = async (payload:any)=> {
-    const {rentalRequestId,userId,amount,}=payload
+const createCheckoutSession = async (payload:any,userId:string)=> {
+    const {rentalRequestId,amount,}=payload
+    console.log(userId,rentalRequestId);
     // jodi rental request approved kore tahole payment korte parbe 
+     const getRental=await prisma.rentalRequests.findFirst({
+        where:{
+            tenantId:userId,
+            id:rentalRequestId,  
+        }
+      })
+      if(!getRental){
+        throw new Error("Sorry not founded rental")
+      }
+      if(getRental?.status!=="APPROVED"){
+        throw new Error("Your can not create payment because rental status is not approved")
+      }
   const order = await prisma.payments.create({
    data: {
       rentalRequestId,
@@ -27,7 +40,7 @@ const createCheckoutSession = async (payload:any)=> {
         price_data: {
           currency: 'bdt',
           product_data: {
-                  name: `Rental Payment (Request ID: ${rentalRequestId})`,          },
+          name: `Rental Payment (Request ID: ${rentalRequestId})`,          },
           unit_amount: amount * 100, 
         },
         quantity: 1,
@@ -84,7 +97,28 @@ const handleConfrim=async(sig:string,payload:Buffer)=>{
       console.log(`Unhandled event type ${event.type}.`);
   }
 }
+
+const getUserPaymentHistoryIntoDb=async(userId:string)=>{
+const paymentHistories=await prisma.payments.findMany({
+  where:{
+    userId:userId
+
+  }
+})
+return paymentHistories
+}
+
+const getPaymentDetailsIntoDb=async(id:string)=>{
+  const getSinglePayment=await prisma.payments.findUniqueOrThrow({
+    where:{
+      id
+    }
+  })
+  return getSinglePayment
+}
 export const paymentService = {
   createCheckoutSession,
-  handleConfrim
+  handleConfrim,
+  getPaymentDetailsIntoDb,
+  getUserPaymentHistoryIntoDb
 };

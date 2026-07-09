@@ -1,9 +1,11 @@
 import type { RequestHandler } from "express";
 import catchAsync from "../../utils/catchAsync";
 import { paymentService } from "./payment.service";
+import { sendResponse } from "../../utils/sendResponse";
 
 const initiatePayment:RequestHandler=catchAsync(async(req,res)=>{
-    const paymentUrl = await paymentService.createCheckoutSession(req.body);
+    const userId=req.user?.id as string
+    const paymentUrl = await paymentService.createCheckoutSession(req.body,userId);
     console.log(paymentUrl);
 
 })
@@ -11,7 +13,28 @@ const confirmPayment:RequestHandler=catchAsync(async(req,res)=>{
    const sig = req.headers['stripe-signature'] as string
    const event=req.body
    await paymentService.handleConfrim(sig,event)
-   console.log(sig,"from contoller");
+   
+})
+const getUserPaymentHistory:RequestHandler=catchAsync(async(req,res)=>{
+    const userId=req.user?.id
+    console.log(userId);
+    const result=await paymentService.getUserPaymentHistoryIntoDb(userId)
+    sendResponse(res,{
+        statusCode:200,
+        success:true,
+        message:"All payment history retrived successfull",
+        data:result
+    })
+})
+const getPaymentDetails:RequestHandler=catchAsync(async(req,res)=>{
+    const id=req.params?.id as string
+    const result=await paymentService.getPaymentDetailsIntoDb(id)
+    sendResponse(res,{
+        success:true,
+        statusCode:200,
+        data:result,
+        message:"Payment retrived successfull"
+    })
 })
 // const initiatePayment:RequestHandler = async (req: Request, res: Response) => {
 //   try {
@@ -31,5 +54,7 @@ const confirmPayment:RequestHandler=catchAsync(async(req,res)=>{
 // };
 export const paymentController={
     initiatePayment,
-    confirmPayment
+    getPaymentDetails,
+    confirmPayment,
+    getUserPaymentHistory
 }
