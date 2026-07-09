@@ -9,6 +9,7 @@ import { rentalRouter } from "./modules/rental/rental.router"
 import { reviewRouter } from "./modules/review/review.router"
 import { adminRouter } from "./modules/admin/admin.router"
 import { paymentRouter } from "./modules/payment/payment.router"
+import notFound from "./middlewares/notFound"
 const app:Application=express()
 
 app.use("/api/payments/confirm",express.raw({ type: 'application/json' }))
@@ -33,6 +34,6 @@ app.get('/',(req:Request,res:Response)=>{
     res.send("Server is connected!")
 })
 
-
+app.use(notFound)
 export default app
 
