@@ -62,7 +62,8 @@ const getPropertiesIntoDb=async(queries:any)=>{
     })
         },
         include:{
-            reviews:true
+            reviews:true,
+            categories:true
         }
     })
 

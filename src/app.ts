@@ -32,7 +32,11 @@ app.use("/api/rentals",rentalRouter)
 app.use("/api/reviews",reviewRouter)
 app.use("/api/payments",paymentRouter)
 app.get('/',(req:Request,res:Response)=>{
-    res.send("Server is connected!")
+    res.send({
+       
+        success:true,
+        message:"Server connected successfull"
+    })
 })
 
 app.use(notFound)

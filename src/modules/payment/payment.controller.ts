@@ -6,7 +6,14 @@ import { sendResponse } from "../../utils/sendResponse";
 const initiatePayment:RequestHandler=catchAsync(async(req,res)=>{
     const userId=req.user?.id as string
     const paymentUrl = await paymentService.createCheckoutSession(req.body,userId);
-    console.log(paymentUrl);
+     sendResponse(res,{
+        statusCode:201,
+        success:true,
+        message:"Payment url Create successfullyt",
+        data:{
+            paymentUrl
+        }
+    })
 
 })
 const confirmPayment:RequestHandler=catchAsync(async(req,res)=>{

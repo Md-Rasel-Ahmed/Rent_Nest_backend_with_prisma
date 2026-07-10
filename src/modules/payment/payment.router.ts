@@ -15,6 +15,13 @@ route.get("/success",(req,res)=>{
     message:"Your payment has been succeed!"
   })
 })
+route.get("/cancel",(req,res)=>{
+  sendResponse(res,{
+    success:false,
+    statusCode:404,
+    message:"Your payment has been canceled!"
+  })
+})
 route.get("/",verifyToken,paymentController.getUserPaymentHistory)
 route.get("/:id",verifyToken,paymentController.getPaymentDetails)
 export const paymentRouter=route

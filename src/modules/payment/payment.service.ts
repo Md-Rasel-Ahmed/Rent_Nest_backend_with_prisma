@@ -52,8 +52,8 @@ const createCheckoutSession = async (payload:any,userId:string)=> {
       userId: userId,
       rentalRequestId: rentalRequestId
     },
-    success_url: `http://localhost:5000/api/payments/success?orderId=${order.id}`,
-    cancel_url: `http://localhost:5000/api/payments/cancel?orderId=${order.id}`,
+    success_url: `https://assinemen4.vercel.app/api/payments/success?orderId=${order.id}`,
+    cancel_url: `https://assinemen4.vercel.app/api/payments/cancel?orderId=${order.id}`,
   });
 
   return session.url;
