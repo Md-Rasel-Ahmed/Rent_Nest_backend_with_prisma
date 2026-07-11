@@ -3,7 +3,7 @@ model payments {
     rentalRequestId String
     rental          rentalRequests @relation(fields: [rentalRequestId], references: [id])
     userId          String
-    user            users          @relation(fields: [userId], references: [id])
+    user            users          @relation(fields: [userId], references: [id], onDelete: Cascade)
     amount          Int
     provider        String
     transactionId   String

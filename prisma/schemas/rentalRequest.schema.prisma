@@ -1,7 +1,7 @@
 model rentalRequests {
     id         String       @id @default(uuid())
     tenantId   String
-    tenant     users        @relation(fields: [tenantId], references: [id])
+    tenant     users        @relation(fields: [tenantId], references: [id], onDelete: Cascade)
     propertyId String
     property   properties   @relation(fields: [propertyId], references: [id])
     moveInDate Int

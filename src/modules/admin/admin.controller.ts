@@ -58,11 +58,24 @@ const updateCategory:RequestHandler=catchAsync(async(req,res)=>{
 
     })
 })
+const deleteUser:RequestHandler=catchAsync(async(req,res)=>{
+    const id=req.params?.id
+    const result=await adminService.deleteUserIntoDb(id as string)
+    sendResponse(res,{
+        success:true,
+        statusCode:httpStatus.OK,
+        data:result,
+        message:"User delete successfull"
+
+    })
+})
+
 
 export const adminController={
     getAllUser,
     updateUserStatus,
     getAllProperty,
+    deleteUser,
     getAllRental,
     updateCategory
 }

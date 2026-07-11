@@ -49,6 +49,7 @@ https://assinemen4.vercel.app
 
 - View All Users
 - Ban / Unban Users
+- Delete user
 - View All Properties
 - View All Rental Requests
 - Manage Categories
@@ -128,6 +129,7 @@ https://assinemen4.vercel.app
 | GET    | /api/admin/rentals      |
 | PATCH  | /api/admin/users/:id    |
 | PATCH  | /api/admin/category/:id |
+| DELETE | /api/admin/users/:id    |
 
 ---
 

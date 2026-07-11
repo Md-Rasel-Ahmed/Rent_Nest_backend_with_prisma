@@ -10,7 +10,7 @@ model properties {
     area           String
     isAvailable    Boolean
     landlordId     String
-    landlored      users            @relation(fields: [landlordId], references: [id])
+    landlored      users            @relation(fields: [landlordId], references: [id], onDelete: Cascade)
     categoryId     String
     categories     categories       @relation(fields: [categoryId], references: [id])
     createdAt      DateTime         @default(now())

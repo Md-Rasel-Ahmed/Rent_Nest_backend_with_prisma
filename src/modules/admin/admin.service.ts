@@ -47,9 +47,18 @@ const updateCategoryIntoDb=async(payload:string,id:string)=>{
   })
   return update
 }
+const deleteUserIntoDb=async(id:string)=>{
+   await prisma.users.delete({
+    where:{
+        id
+    }
+  })
+  
+}
 export const adminService={
     getAllUserIntoDb,
     updateCategoryIntoDb,
+    deleteUserIntoDb,
     getAllPropertyIntoDb,
     getAllRentalIntoDb,
     updateUserStatusIntoDb

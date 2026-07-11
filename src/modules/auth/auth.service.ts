@@ -66,6 +66,9 @@ const getProfileIntoDb=async(id:string)=>{
   const user=await prisma.users.findUniqueOrThrow({
     where:{
         id:id
+    },
+    omit:{
+        password:true
     }
   })
   return user
