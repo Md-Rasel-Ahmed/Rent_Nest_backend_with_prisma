@@ -79,20 +79,36 @@ const deletePropertyIntoDb=async(id:string)=>{
     return properties
 }
 const updateRentalStatusIntoDb=async(id:string,payload:any)=>{
+    // const status=payload.status.toUpperCase()
+    if(!payload.status){
+        throw new Error("Invalid property! type 'STATUS' ")
+    }
     const properties=await prisma.rentalRequests.update({
         where:{
             id:id
         },
         data:{
-            status:payload.status
+            status:payload.status,  
         }
     })
     return properties
 }
 const getRentalRequestsIntoDb=async(userId:string)=>{
+
    const getRentalProperty=await prisma.rentalRequests.findMany({
     where:{
-        tenantId:userId
+        property:{
+            landlordId:userId
+        }
+    },
+    include:{
+        tenant:{
+            omit:{
+                password:true
+            }
+        },
+        
+        property:true
     }
    })
    return getRentalProperty

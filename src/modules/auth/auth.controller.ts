@@ -9,10 +9,12 @@ const registerUser:RequestHandler=catchAsync(async(req,res)=>{
     const payload=req.body
     
   const result=await authService.registerUserIntoDb(payload)
-  res.send({
+  sendResponse(res,{
+    statusCode:httpStatus.CREATED,
     success:true,
+    message:"User create successfull",
     data:result
-  })
+   })
 })
 const loginUser:RequestHandler=catchAsync(async(req,res)=>{
     const payload=req.body
